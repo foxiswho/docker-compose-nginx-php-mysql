@@ -76,9 +76,9 @@ mac 系统默认硬盘 不区分大小写，
 ##2.nginx 配置
 进入nginx容器
 ```
-docker exec -it composehaproxyweb_nginx_1 bash
+docker exec -it compose_nginx_1 bash
 ```
-`composehaproxyweb_nginx_1` 容器名字可能不一样
+`compose_nginx_1` 容器名字可能不一样
 配置nginx.conf
 ```
 vim /etc/nginx/nginx.conf
