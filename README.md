@@ -27,7 +27,7 @@ cd mac-php56
 ```
 docker-compose up
 ```
-时间比较长，最好早晨拉取
+时间比较长， 更新源都在国外，最好早晨拉取
 #nginx
 配置文件位置：/etc/nginx/nginx.conf
 
