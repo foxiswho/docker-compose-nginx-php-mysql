@@ -5,6 +5,8 @@ nginx:
     links:
       - "php"
       - "redis"
+#    external_links:
+#      - "compose.yaml文件之外的容器"
     volumes:
       - /Users/:/Users/
       - /Volumes/:/Volumes/

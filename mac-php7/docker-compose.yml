@@ -5,6 +5,8 @@ nginx:
     links:
       - "php"
       - "redis"
+#    external_links:
+#      - "compose.yaml文件之外的容器"
     volumes:
       - /Users/:/Users/
       - /Volumes/:/Volumes/
@@ -19,10 +21,14 @@ nginx:
 php:
     build: ./php
     ports:
-      - "9000:9000"
+      - "9001:9001"
     links:
       - "mysql"
       - "redis"
+#    external_links:
+#      - "compose.yaml文件之外的容器"
+#      - mysql
+#      - redis
     volumes:
       - /Users/:/Users/
       - /Volumes/:/Volumes/

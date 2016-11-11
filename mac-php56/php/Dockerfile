@@ -13,7 +13,6 @@ RUN rm -rf /etc/localtime \
   wget \
 && echo "alias ls='ls -lhG --color=auto'" >> /root/.bashrc \
 && echo "alias ll='ls -lhG --color=auto'" >> /root/.bashrc \
-&& source /root/.bashrc \
 && echo "post_max_size = 50M" >> /usr/local/etc/php/conf.d/php.ini \
 && echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/php.ini \
 && echo "date.timezone = PRC" >> /usr/local/etc/php/conf.d/php.ini \
@@ -22,3 +21,7 @@ RUN rm -rf /etc/localtime \
 && echo "max_execution_time = 300" >> /usr/local/etc/php/conf.d/php.ini \
 && echo ";register_long_arrays = On" >> /usr/local/etc/php/conf.d/php.ini \
 && echo ";magic_quotes_gpc = On" >> /usr/local/etc/php/conf.d/php.ini
+
+
+
+#&& source /root/.bashrc \
