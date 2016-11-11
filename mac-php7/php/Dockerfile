@@ -50,11 +50,13 @@ RUN buildDeps=" \
     && docker-php-ext-configure ldap --with-ldap-sasl \
     && docker-php-ext-install $phpModules \
     && printf "\n" | pecl install amqp \
+    && printf "\n" | pecl install memcache \
     && pecl install mongodb \
     && pecl install redis \
     && docker-php-source delete \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
-#    && printf "\n" | pecl install memcache \
+
+#
 # Install additional packages
 RUN apt-get update && apt-get install -y git msmtp-mta openssh-client --no-install-recommends
 
