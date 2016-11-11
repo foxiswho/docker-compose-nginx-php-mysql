@@ -4,7 +4,7 @@ nginx:
       - "80:80"
     links:
       - "php"
-      - "redis"
+#      - "redis"
 #    external_links:
 #      - "compose.yaml文件之外的容器"
     volumes:
@@ -21,10 +21,10 @@ nginx:
 php:
     build: ./php
     ports:
-      - "9001:9001"
-    links:
-      - "mysql"
-      - "redis"
+      - "9000:9000"
+#    links:
+#      - "mysql"
+#      - "redis"
 #    external_links:
 #      - "compose.yaml文件之外的容器"
 #      - mysql
@@ -32,25 +32,26 @@ php:
     volumes:
       - /Users/:/Users/
       - /Volumes/:/Volumes/
-    environment:
-        - DEBUG=true
-mysql:
-    build: ./mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-redis:
-    build: ./redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - /Users/:/Users/
-elasticsearch:
-    images: elasticsearch:latest
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
+#    environment:
+#        - DEBUG=true
+#mysql:
+#    build: ./mysql
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#redis:
+#    build: ./redis
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - /Users/:/Users/
+
+#elasticsearch:
+#    images: elasticsearch:latest
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    volumes:
+#      - /Users/:/Users/
+#      - /Volumes/:/Volumes/

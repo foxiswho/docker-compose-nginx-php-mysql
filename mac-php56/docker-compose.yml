@@ -43,7 +43,7 @@ redis:
     volumes:
       - /Users/:/Users/
 elasticsearch:
-    images: elasticsearch:latest
+    build: ./elasticsearch
     ports:
       - "9200:9200"
       - "9300:9300"
