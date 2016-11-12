@@ -61,6 +61,8 @@ docker-compose up
 ```
 /Volumes/work/lanmps/vhost/
 ```
+Volumes: MAC系统 卷 硬盘名称都会显示在里面
+
 work：分区名称
 
 lanmps:自定义目录
