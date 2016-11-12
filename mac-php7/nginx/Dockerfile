@@ -12,5 +12,4 @@ wget \
 && sed '1i\fastcgi_param  SCRIPT_FILENAME    \$document_root\$fastcgi_script_name;' /etc/nginx/fastcgi_params > /etc/nginx/fastcgi
 
 
-#CMD ["php", "-a"]
 #&& source /root/.bashrc \
