@@ -1,4 +1,4 @@
-FROM foxiswho/docker-php:php7-fpm
+FROM foxiswho/php:php7-fpm
 
 RUN rm -rf /etc/localtime \
 && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
