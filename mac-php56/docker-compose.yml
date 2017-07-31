@@ -18,6 +18,7 @@ nginx:
       - "9300"
     environment:
         - DEBUG=true
+        - HOST_OS=mac
 php:
     build: ./php
     ports:

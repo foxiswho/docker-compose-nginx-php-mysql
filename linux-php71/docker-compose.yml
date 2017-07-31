@@ -5,11 +5,11 @@ nginx:
     links:
       - "php"
     volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
+      - /www/:/www/
+      - /home/:/home/
     environment:
         - DEBUG=true
-        - HOST_OS=mac
+        - HOST_OS=linux
     expose:
       - "9000"
       - "6379"
@@ -21,8 +21,8 @@ php:
     ports:
       - "9000:9000"
     volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
+      - /www/:/www/
+      - /home/:/home/
 mysql:
     build: ./mysql
     ports:
@@ -34,12 +34,12 @@ redis:
     ports:
       - "6379:6379"
     volumes:
-      - /Users/:/Users/
+      - /www/:/www/
 elasticsearch:
     build: ./elasticsearch
     ports:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
+      - /www/:/www/
+      - /home/:/home/

@@ -9,6 +9,7 @@ nginx:
       - /Volumes/:/Volumes/
     environment:
         - DEBUG=true
+        - HOST_OS=mac
     expose:
       - "9000"
       - "6379"
