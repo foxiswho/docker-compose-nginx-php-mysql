@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # 宿主机执行 当前文件
 

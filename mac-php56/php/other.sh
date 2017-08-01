@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 #用于手动操作
 echo "alias ls='ls -lhG --color=auto'" >> /root/.bashrc \
