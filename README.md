@@ -14,10 +14,18 @@ elasticsearch:latest
 ### Mac系统 安装方式
 1.选择要安装的系统和版本
 
-例如：mac系统 php5.6.x版本,进入`mac-php56`目录
+例如：mac系统 php5.7.1版本,进入`mac-php71`目录
 ```
-cd mac-php56
+cd mac-php71
 ```
+
+安装完成后 一定要配置PHP
+`主要 启用PHP 扩展`
+```shell
+docker exec -it macphp71_1 /start.sh
+```
+`macphp71_1` PHP容器名字 可能生成的不一样
+
 2.docker-compose.yml配置更改
 
 选择你需要的功能，不需要的用#号注释掉
@@ -110,6 +118,12 @@ include /Volumes/work/vhost/*.conf;
 <?php
 phpinfo();
 ```
+## 安装完成后 一定要配置PHP
+`主要 启用PHP 扩展`
+```shell
+docker exec -it macphp71_1 /start.sh
+```
+macphp71_1 容器名字可能生成的不一样
 
 ##### X.问题
 X.1 权限问题
