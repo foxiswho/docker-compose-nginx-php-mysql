@@ -22,9 +22,9 @@ cd mac-php71
 安装完成后 一定要配置PHP
 `主要 启用PHP 扩展`
 ```shell
-docker exec -it macphp71_1 /start.sh
+docker exec -it macphp71_php_1 /start.sh
 ```
-`macphp71_1` PHP容器名字 可能生成的不一样
+`macphp71_php_1` PHP容器名字 可能生成的不一样
 
 2.docker-compose.yml配置更改
 
@@ -55,8 +55,10 @@ docker-compose up
 
 /usr/local/etc/php-fpm.d  目录
 
-##php.ini 默认加载目录位置
+#### php.ini 默认加载目录位置
 /usr/local/etc/php/conf.d/  目录
+### 扩展目录位置
+/usr/local/lib/php/extensions/
 
 #### redis
 来源：官方源 
