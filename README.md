@@ -70,6 +70,7 @@ docker-compose up
 新建目录
 ```
 /Volumes/work/vhost/
+/Volumes/work/wwwroot/
 ```
 Volumes: MAC系统 卷 硬盘名称都会显示在里面
 
@@ -81,6 +82,14 @@ vhost：nginx 站点配置文件
 
 复制 `nginx/default.conf` 到 `/Volumes/work/vhost/` 目录下
 
+在 `/Volumes/work/wwwroot/` 目录下
+新建 index.php
+```
+<?php
+phpinfo();
+```
+
+
 ##### 1.mac硬盘设置
 mac 系统默认硬盘 不区分大小写，
 
@@ -89,6 +98,9 @@ mac 系统默认硬盘 不区分大小写，
 `建议分区，我这里是分区的`
 
 ##### 2.nginx 配置
+本配置 nginx 默认启动时已经自动配置了，
+以下是手动配置方法
+
 进入nginx容器
 ```
 docker exec -it compose_nginx_1 bash
