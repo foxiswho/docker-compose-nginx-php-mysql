@@ -40,6 +40,27 @@ elasticsearch:latest
 
 # Mac系统 docker 安装案例
 ## Mac系统 安装方式
+
+https://www.docker.com/docker-mac
+
+下载该软件,安装略
+
+**开始设置目录**
+
+菜单->Preferences->File Sharing,点 + 号,选择 跟目录下的 `Volumes` 文件夹，点击 `Apply & Restart` 按钮
+
+**设置阿里云源**
+菜单->Preferences->Daemon ,Basic 选项卡 ,Registry mirrors 下,点 + 号,把你的阿里云镜像加速地址加入进去。
+
+阿里云镜像加速地址类似于这种格式`https://******.mirror.aliyuncs.com`,
+
+**如果设置自己的阿里云镜像加速地址**
+到阿里云控制台找到属于自己的 镜像加速地址：https://cr.console.aliyun.com/#/accelerator
+
+加速地址设置教程-> https://yq.aliyun.com/articles/29941
+
+
+
 ### 0.首先MAC系统硬盘设置
 mac 系统默认硬盘默认 `不区分大小写`，
 
