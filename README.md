@@ -11,6 +11,13 @@ nginx:latest
 
 elasticsearch:latest
 
+# 更新说明
+ * 2018-3-11 
+   * 更新 docker-compose 版本为3.5版本
+   * 去除 elasticsearch 容器 (稍后放出 elk容器集群)
+   * 更新 网络名称为`lnmp`,不使用默认网络，方便其他容器或容器集群加入到`lnmp`网络中
+   * 更新 nginx default.conf配置文件,调用php容器默认别名
+
 # nginx docker内配置文件位置
 配置文件位置：/etc/nginx/nginx.conf
 
