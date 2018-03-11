@@ -1,53 +1,75 @@
-nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-    links:
-      - "php"
-      - "redis"
-#    external_links:
-#      - "compose.yaml文件之外的容器"
-    volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
-    expose:
-      - "9000"
-      - "6379"
-      - "3306"
-      - "9200"
-      - "9300"
-    environment:
-        - DEBUG=true
-        - HOST_OS=mac
-php:
-    build: ./php
-    ports:
-      - "9000:9000"
-    links:
-      - "mysql"
-      - "redis"
-    volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
-    environment:
-        - DEBUG=true
-mysql:
-    build: ./mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-redis:
-    build: ./redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - /Users/:/Users/
-elasticsearch:
-    build: ./elasticsearch
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - /Users/:/Users/
-      - /Volumes/:/Volumes/
+version: '3.5'
+
+services:
+  nginx:
+      build: ./nginx
+      ports:
+        - "80:80"
+      links:
+        - "php"
+        - "redis"
+  #    external_links:
+  #      - "compose.yaml文件之外的容器"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+      expose:
+        - "9000"
+        - "6379"
+        - "3306"
+      #  - "9200"
+      #  - "9300"
+      environment:
+          - DEBUG=true
+          - HOST_OS=mac
+      networks:
+              lnmp:
+                  aliases:
+                    - nginx
+  php:
+      build: ./php
+      ports:
+        - "9000:9000"
+      links:
+        - "mysql"
+        - "redis"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+      environment:
+          - DEBUG=true
+      networks:
+              lnmp:
+                  aliases:
+                    - php
+  mysql:
+      build: ./mysql
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+      networks:
+              lnmp:
+                  aliases:
+                    - mysql
+  redis:
+      build: ./redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - /Users/:/Users/
+      networks:
+              lnmp:
+                  aliases:
+                    - redis
+#  elasticsearch:
+#      build: ./elasticsearch
+#      ports:
+#        - "9200:9200"
+#        - "9300:9300"
+#      volumes:
+#        - /Users/:/Users/
+#        - /Volumes/:/Volumes/
+networks:
+  lnmp:
+    driver: bridge
