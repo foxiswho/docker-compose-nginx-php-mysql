@@ -5,9 +5,8 @@ services:
       build: ./nginx
       ports:
         - "80:80"
-      links:
-        - "php"
       volumes:
+        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
         - /Users/:/Users/
         - /Volumes/:/Volumes/
       environment:
