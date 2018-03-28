@@ -9,13 +9,14 @@ services:
         - ./nginx/vhost:/etc/nginx/conf/vhost:ro
         - /Users/:/Users/
         - /Volumes/:/Volumes/
+        - ./nginx/vhost:/Volumes/work/vhost:ro
       environment:
           - DEBUG=true
           - HOST_OS=mac
-      expose:
-        - "9000"
-        - "6379"
-        - "3306"
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
 #        - "9200"
 #        - "9300"
       networks:
