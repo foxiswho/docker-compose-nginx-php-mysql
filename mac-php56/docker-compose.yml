@@ -5,20 +5,20 @@ services:
       build: ./nginx
       ports:
         - "80:80"
-      links:
-        - "php"
-        - "redis"
+#      links:
+#        - "php"
+#        - "redis"
   #    external_links:
   #      - "compose.yaml文件之外的容器"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
-      expose:
-        - "9000"
-        - "6379"
-        - "3306"
-      #  - "9200"
-      #  - "9300"
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
       environment:
           - DEBUG=true
           - HOST_OS=mac
@@ -28,11 +28,8 @@ services:
                     - nginx
   php:
       build: ./php
-      ports:
-        - "9000:9000"
-      links:
-        - "mysql"
-        - "redis"
+#      ports:
+#        - "9000:9000"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
@@ -62,14 +59,6 @@ services:
               lnmp:
                   aliases:
                     - redis
-#  elasticsearch:
-#      build: ./elasticsearch
-#      ports:
-#        - "9200:9200"
-#        - "9300:9300"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
 networks:
   lnmp:
     driver: bridge

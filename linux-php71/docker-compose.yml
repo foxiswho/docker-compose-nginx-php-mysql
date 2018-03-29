@@ -5,18 +5,16 @@ services:
       build: ./nginx
       ports:
         - "80:80"
-      links:
-        - "php"
       volumes:
         - /www/:/www/
         - /home/:/home/
       environment:
           - DEBUG=true
           - HOST_OS=linux
-      expose:
-        - "9000"
-        - "6379"
-        - "3306"
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
 #        - "9200"
 #        - "9300"
       networks:
@@ -25,8 +23,8 @@ services:
               - nginx
   php:
       build: ./php
-      ports:
-        - "9000:9000"
+#      ports:
+#        - "9000:9000"
       volumes:
         - /www/:/www/
         - /home/:/home/
@@ -50,18 +48,6 @@ services:
         - "6379:6379"
       volumes:
         - /www/:/www/
-#  elasticsearch:
-#      build: ./elasticsearch
-#      ports:
-#        - "9200:9200"
-#        - "9300:9300"
-#      volumes:
-#        - /www/:/www/
-#        - /home/:/home/
-#      networks:
-#              lnmp:
-#                  aliases:
-#                    - elasticsearch
 networks:
   lnmp:
     driver: bridge

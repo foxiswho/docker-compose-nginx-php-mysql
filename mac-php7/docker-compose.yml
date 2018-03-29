@@ -5,28 +5,26 @@ services:
       build: ./nginx
       ports:
         - "80:80"
-      links:
-        - "php"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
       environment:
           - DEBUG=true
           - HOST_OS=mac
-      expose:
-        - "9000"
-        - "6379"
-        - "3306"
-      #  - "9200"
-      #  - "9300"
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
       networks:
                     lnmp:
                         aliases:
                           - nginx
   php:
       build: ./php
-      ports:
-        - "9000:9000"
+#      ports:
+#        - "9000:9000"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
@@ -54,14 +52,6 @@ services:
                     lnmp:
                         aliases:
                           - redis
-#  elasticsearch:
-#      build: ./elasticsearch
-#      ports:
-#        - "9200:9200"
-#        - "9300:9300"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
 networks:
   lnmp:
     driver: bridge
