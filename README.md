@@ -44,7 +44,7 @@ nginx:latest
 # elasticsearch
 来源：官方源 
 
-# Mac系统 docker 安装案例
+# Mac系统 docker php71 安装案例
 ## Mac系统 安装方式
 
 https://www.docker.com/docker-mac
@@ -79,7 +79,7 @@ mac 系统默认硬盘默认 `不区分大小写`，
 
 ### 1.选择要安装的系统和版本
 
-例如：mac系统 php5.7.1版本,进入`mac-php71`目录
+例如：mac系统 php7.1版本,进入`mac-php71`目录
 ```shell
 cd mac-php71
 ```
@@ -91,7 +91,6 @@ cd mac-php71
 ### 3.建立目录和文件
 新建目录
 ```shell
-/Volumes/work/vhost/
 /Volumes/work/wwwroot/
 ```
 Volumes: MAC系统 卷 硬盘名称都会显示在里面,`work`单独的分区
@@ -100,15 +99,21 @@ work：分区名称
 
 wwwroot:自定义目录,默认目录
 
-vhost：nginx 站点配置文件
+nginx/vhost：nginx 站点配置文件
 
-复制 `nginx/default.conf` 到 `/Volumes/work/vhost/` 目录下
+在当前 `nginx/vhost` 目录下，配置你的 nginx站点，可以根据 `default.conf`进行修改
 
 在 `/Volumes/work/wwwroot/` 目录下
 新建 `index.php`
 ```php
 <?php
 phpinfo();
+```
+
+>注意 如果你是自定义本地站点如`test.com`，那么就要在 `/etc/hosts` 加入本地host指向，编辑时需要`root`权限的哦
+
+```SHELL
+127.0.0.1 test.com
 ```
 
 ### 4.生成镜像
@@ -125,10 +130,8 @@ docker-compose up
 完成后，在浏览器里面输入`localhost`回车，即可看到`phpinfo`输出信息
 
 ## 安装完成后 一定要配置PHP，主要启用PHP扩展
-主要 `启用`PHP`扩展`
-```shell
-docker exec -it macphp71_1 /start.sh
-```
+基本PHP 扩展已经启用，这里无须再启用
+
 macphp71_1 容器名字可能生成的不一样
 
 # X.问题
