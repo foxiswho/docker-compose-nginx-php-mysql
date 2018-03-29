@@ -13,6 +13,7 @@ services:
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
+        - ./nginx/vhost:/Volumes/work/vhost:ro
 #      expose:
 #        - "9000"
 #        - "6379"
