@@ -8,6 +8,7 @@ services:
       volumes:
         - /www/:/www/
         - /home/:/home/
+        - ./nginx/vhost:/www/vhost:ro
       environment:
           - DEBUG=true
           - HOST_OS=linux

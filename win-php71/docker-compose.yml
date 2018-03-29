@@ -9,6 +9,7 @@ services:
         - "php"
       volumes:
         - /e/www/:/www/
+        - ./nginx/vhost:/www/vhost:ro
       environment:
           - DEBUG=true
           - HOST_OS=windows
