@@ -1,5 +1,5 @@
 # docker-compose-nginx-php-mysql
-docker-compose+nginx+php+mysql+redis+elasticsearch
+docker-compose+nginx+php+mysql+redis
 # 版本
 php:5.6.x
 php:7.x
@@ -9,7 +9,6 @@ mysql:5.7.x
 
 nginx:latest
 
-elasticsearch:latest
 
 # 更新说明
  * 2018-3-11 
