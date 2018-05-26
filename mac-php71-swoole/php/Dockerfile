@@ -1,1 +1,1 @@
-FROM foxiswho/php-alpine:php71
+FROM foxiswho/php-alpine:php71-fpm

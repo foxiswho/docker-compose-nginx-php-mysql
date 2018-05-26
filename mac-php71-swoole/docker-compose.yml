@@ -36,6 +36,17 @@ services:
                     - php
       depends_on:
             - mysql
+  php:
+      build: ./php-cli
+#      ports:
+#        - "9000:9000"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+      networks:
+              lnmp:
+                  aliases:
+                    - phpcli
   mysql:
       build: ./mysql
       hostname: mysqlhost
