@@ -23,10 +23,12 @@ services:
               lnmp:
                   aliases:
                     - nginx
+      depends_on:
+            - php
   php:
       build: ./php
-#      ports:
-#        - "9000:9000"
+      expose:
+        - "9000"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
@@ -36,13 +38,16 @@ services:
                     - php
       depends_on:
             - mysql
-  php:
+  phpcli:
       build: ./php-cli
-#      ports:
-#        - "9000:9000"
+      expose:
+        - "9501"
+      ports:
+        - "9501:9501"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
+        - ./php-cli/demo:/demo:ro
       networks:
               lnmp:
                   aliases:
