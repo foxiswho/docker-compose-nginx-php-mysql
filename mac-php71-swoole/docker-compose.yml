@@ -20,7 +20,7 @@ services:
 #        - "9200"
 #        - "9300"
       networks:
-              lnmp:
+              swoole:
                   aliases:
                     - nginx
       depends_on:
@@ -33,7 +33,7 @@ services:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
       networks:
-              lnmp:
+              swoole:
                   aliases:
                     - php
       depends_on:
@@ -49,7 +49,7 @@ services:
         - /Volumes/:/Volumes/
         - ./php-cli/demo:/demo:ro
       networks:
-              lnmp:
+              swoole:
                   aliases:
                     - phpcli
   mysql:
@@ -60,7 +60,7 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: root
       networks:
-                  lnmp:
+                  swoole:
                       aliases:
                         - mysqlhost
   redis:
@@ -70,9 +70,9 @@ services:
       volumes:
         - /Users/:/Users/
       networks:
-                  lnmp:
+                  swoole:
                       aliases:
                         - redis
 networks:
-  lnmp:
+  swoole:
     driver: bridge
