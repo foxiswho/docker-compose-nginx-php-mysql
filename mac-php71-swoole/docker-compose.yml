@@ -43,8 +43,8 @@ services:
       command: php /demo/demo.php
 #      expose:
 #        - "9501"
-      ports:
-        - "9501:9501"
+#      ports:
+#        - "9501:9501"
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
