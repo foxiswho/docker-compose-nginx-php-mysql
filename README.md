@@ -175,3 +175,11 @@ include /Volumes/work/vhost/*.conf;
 略 
 
 跟nginx类似
+
+# mysql 配置说明
+```angular2html
+docker exec -it mac-php71-swoole_mysql_1 bash
+
+echo "sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+
+```
