@@ -1,0 +1,1 @@
+FROM foxiswho/nginx:latest

@@ -1,0 +1,73 @@
+version: '3.5'
+
+services:
+  nginx:
+      build: ./nginx
+      ports:
+        - "80:80"
+      volumes:
+        - /e/www/:/www/
+        - ./nginx/vhost:/www/vhost:ro
+      environment:
+          - DEBUG=true
+          - HOST_OS=windows
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
+      networks:
+              swoole:
+                  aliases:
+                    - nginx
+  php:
+      build: ./php
+      expose:
+        - "9000"
+#      ports:
+#        - "9000:9000"
+      volumes:
+        - /e/www/:/www/
+      networks:
+              swoole:
+                  aliases:
+                    - php
+  phpcli:
+      build: ./php-cli
+      command: php /demo/demo.php
+#      expose:
+#        - "9501"
+#      ports:
+#        - "9501:9501"
+      volumes:
+        - /e/www/:/www/
+        - ./php-cli/demo:/demo:ro
+      networks:
+              swoole:
+                  aliases:
+                    - phpcli
+  mysql:
+      build: ./mysql
+      hostname: mysqlhost
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+      networks:
+              swoole:
+                  aliases:
+                    - mysql
+  redis:
+      build: ./redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - /e/www/:/www/
+      networks:
+              swoole:
+                  aliases:
+                    - redis
+networks:
+  swoole:
+    driver: bridge
