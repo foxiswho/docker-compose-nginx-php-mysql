@@ -134,6 +134,95 @@ docker-compose up
 
 macphp71_1 容器名字可能生成的不一样
 
+# Windows 版 docker php71 安装案例
+
+下载地址
+
+https://www.docker.com/docker-windows
+
+或
+
+https://store.docker.com/editions/community/docker-ce-desktop-windows
+
+下载该软件,安装略
+
+**开始设置目录**
+
+菜单->Preferences->File Sharing,点 + 号,选择 跟目录下的 `Volumes` 文件夹，点击 `Apply & Restart` 按钮
+
+**设置阿里云源**
+菜单->Preferences->Daemon ,Basic 选项卡 ,Registry mirrors 下,点 + 号,把你的阿里云镜像加速地址加入进去。
+
+阿里云镜像加速地址类似于这种格式`https://******.mirror.aliyuncs.com`,
+
+**如果设置自己的阿里云镜像加速地址**
+到阿里云控制台找到属于自己的 镜像加速地址：https://cr.console.aliyun.com/#/accelerator
+
+加速地址设置教程-> https://yq.aliyun.com/articles/29941
+
+
+### 2.docker-compose.yml配置更改
+
+选择你需要的功能，不需要的用#号注释掉
+
+### 3.建立目录和文件
+在`E`盘根目录下建立目录`www`和`work`目录，
+
+在`www`目录下建立 `wwwroot`子目录
+
+然后用户 sourceTree git客户端拉取本项目`docker-compose-nginx-php-mysql`
+到 `work/docker-compose-nginx-php-mysql`目录下
+
+### 1.选择要安装的系统和版本
+
+例如：win系统 php7.1版本,进入`win-php71-swoole`目录
+在命令行里进入该目录
+```shell
+cd e:/work/docker-compose-nginx-php-mysql/win-php71-swoole
+```
+
+wwwroot:自定义目录,默认目录
+
+nginx/vhost：nginx 站点配置文件
+
+在当前 `nginx/vhost` 目录下，配置你的 nginx站点，可以根据 `default.conf`进行修改
+
+在 `E:/www/wwwroot/` 目录下
+新建 `index.php`
+```php
+<?php
+phpinfo();
+```
+
+>注意 如果你是自定义本地站点如`test.com`，那么就要在 `/etc/hosts` 加入本地host指向，编辑时需要`root`权限的哦
+
+```SHELL
+127.0.0.1 test.com
+```
+
+### 4.生成镜像
+在命令行里进入该目录
+```shell
+cd e:/work/docker-compose-nginx-php-mysql/win-php71-swoole
+```
+
+这个时候 一定不能更换目录。
+
+`注意` 如果你以前已经配置过一样的容器那么会自动覆盖容器
+```
+docker-compose up
+```
+时间比较长， 更新源都在国外，最好早晨拉取
+
+
+完成后，在浏览器里面输入`localhost`回车，即可看到`phpinfo`输出信息
+
+## 安装完成后 一定要配置PHP，主要启用PHP扩展
+基本PHP 扩展已经启用，这里无须再启用
+
+macphp71_1 容器名字可能生成的不一样
+
+
 # X.问题
 ## X.1 权限问题
 设置 可读写执行权限
