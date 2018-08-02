@@ -1,0 +1,79 @@
+version: '3.5'
+
+services:
+  nginx:
+      build: ./nginx
+      ports:
+        - "80:80"
+      volumes:
+#        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./nginx/vhost:/Volumes/work/vhost:ro
+      environment:
+          - DEBUG=true
+          - HOST_OS=mac
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
+      networks:
+              swoole:
+                  aliases:
+                    - nginx
+      depends_on:
+            - php
+  php:
+      build: ./php
+      expose:
+        - "9000"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+      networks:
+              swoole:
+                  aliases:
+                    - php
+      depends_on:
+            - mysql
+  phpcli:
+      build: ./php-cli
+      command: php /demo/demo.php
+#      expose:
+#        - "9501"
+#      ports:
+#        - "9501:9501"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./php-cli/demo:/demo:ro
+      networks:
+              swoole:
+                  aliases:
+                    - phpcli
+  mysql:
+      build: ./mysql
+      hostname: mysqlhost
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+      networks:
+                  swoole:
+                      aliases:
+                        - mysqlhost
+  redis:
+      build: ./redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - /Users/:/Users/
+      networks:
+                  swoole:
+                      aliases:
+                        - redis
+networks:
+  swoole:
+    driver: bridge
