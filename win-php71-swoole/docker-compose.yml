@@ -6,7 +6,7 @@ services:
       ports:
         - "80:80"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
         - ./nginx/vhost:/www/vhost:ro
       environment:
           - DEBUG=true
@@ -28,7 +28,7 @@ services:
 #      ports:
 #        - "9000:9000"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
       networks:
               swoole:
                   aliases:
@@ -41,7 +41,7 @@ services:
 #      ports:
 #        - "9501:9501"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
         - ./php-cli/demo:/demo:ro
       networks:
               swoole:
@@ -63,7 +63,7 @@ services:
       ports:
         - "6379:6379"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
       networks:
               swoole:
                   aliases:

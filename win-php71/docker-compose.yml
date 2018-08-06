@@ -8,7 +8,7 @@ services:
       links:
         - "php"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
         - ./nginx/vhost:/www/vhost:ro
       environment:
           - DEBUG=true
@@ -28,7 +28,7 @@ services:
 #      ports:
 #        - "9000:9000"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
       networks:
               lnmp:
                   aliases:
@@ -48,7 +48,7 @@ services:
       ports:
         - "6379:6379"
       volumes:
-        - /e/www/:/www/
+        - e:/www:/www
       networks:
               lnmp:
                   aliases:
