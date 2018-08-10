@@ -71,4 +71,5 @@ services:
                     - redis
 networks:
   swoole:
+    name: swoole
     driver: bridge
