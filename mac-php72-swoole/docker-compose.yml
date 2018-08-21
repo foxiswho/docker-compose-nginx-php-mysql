@@ -49,6 +49,7 @@ services:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
         - ./php-cli/demo:/demo:ro
+      #working_dir: /Volumes/
       networks:
               swoole:
                   aliases:
