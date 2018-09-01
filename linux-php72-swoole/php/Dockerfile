@@ -1,0 +1,1 @@
+FROM foxiswho/php-alpine:php72-fpm
