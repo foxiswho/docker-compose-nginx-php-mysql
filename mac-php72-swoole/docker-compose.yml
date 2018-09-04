@@ -32,6 +32,7 @@ services:
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
+        - /tmp/:/tmp/
       networks:
               swoole:
                   aliases:
@@ -49,6 +50,7 @@ services:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
         - ./php-cli/demo:/demo:ro
+        - /tmp/:/tmp/
       #working_dir: /Volumes/
       networks:
               swoole:
@@ -61,6 +63,8 @@ services:
         - "3306:3306"
       environment:
         MYSQL_ROOT_PASSWORD: root
+      volumes:
+        - /tmp/:/tmp/
       networks:
                   swoole:
                       aliases:
