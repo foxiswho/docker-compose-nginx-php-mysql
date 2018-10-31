@@ -18,14 +18,24 @@ services:
 #        - "3306"
 #        - "9200"
 #        - "9300"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
       networks:
         swoole:
             aliases:
               - nginx
+        swoole-h:
+          ipv4_address: 10.3.1.100
+          aliases:
+          - nginx
   php:
       build: ./php
 #      ports:
 #        - "9000:9000"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
       volumes:
         - /www/:/www/
         - /home/:/home/
@@ -33,6 +43,10 @@ services:
         swoole:
             aliases:
               - php
+        swoole-h:
+          ipv4_address: 10.3.1.110
+          aliases:
+          - php
   phpcli:
       build: ./php-cli
       command: php /demo/demo.php
@@ -40,6 +54,9 @@ services:
 #        - "9501"
 #      ports:
 #        - "9501:9501"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
       volumes:
         - /www/:/www/
         - /home/:/home/
@@ -48,6 +65,10 @@ services:
               swoole:
                   aliases:
                     - phpcli
+              swoole-h:
+                ipv4_address: 10.3.1.120
+                aliases:
+                - phpcli
   mysql:
       build: ./mysql
       hostname: mysqlhost
@@ -73,3 +94,10 @@ networks:
   swoole:
     name: swoole
     driver: bridge
+  swoole-h:
+    name: swoole-h
+    driver: macvlan
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.3.1.0/24
