@@ -3,6 +3,7 @@ version: '3.5'
 services:
   nginx:
       build: ./nginx
+      container_name: nginx
       ports:
         - "80:80"
       volumes:
@@ -34,6 +35,7 @@ services:
             - php
   php:
       build: ./php
+      container_name: php
       expose:
         - "9000"
       volumes:
@@ -55,6 +57,7 @@ services:
             - mysql
   phpcli:
       build: ./php-cli
+      container_name: php-cli
       command: php /demo/demo.php
 #      expose:
 #        - "9501"
@@ -79,23 +82,41 @@ services:
                   - phpcli
   mysql:
       build: ./mysql
-      hostname: mysqlhost
+      container_name: mysql
+      hostname: mysql
       ports:
         - "3306:3306"
       environment:
         MYSQL_ROOT_PASSWORD: root
       volumes:
         - /tmp/:/tmp/
+        #- /my/own/datadir:/var/lib/mysql
       networks:
                   swoole:
                       aliases:
-                        - mysqlhost
+                        - mysql
+                  swoole-h:
+                    ipv4_address: 10.3.1.200
+                    aliases:
+                    - mysql
+  adminer:
+    image: adminer
+    container_name: adminer
+    #restart: always
+    ports:
+    - 3300:8080
+    networks:
+      swoole:
+        aliases:
+        - adminer
   redis:
       build: ./redis
+      container_name: redis
       ports:
         - "6379:6379"
       volumes:
         - /Users/:/Users/
+        #- ./redis/redis.conf:/usr/local/etc/redis/redis.conf
       networks:
                   swoole:
                       aliases:
