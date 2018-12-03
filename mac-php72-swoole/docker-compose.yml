@@ -112,8 +112,10 @@ services:
   redis:
       build: ./redis
       container_name: redis
+      #command: redis-server /usr/local/etc/redis/redis.conf
       ports:
         - "6379:6379"
+        redis-server /usr/local/etc/redis/redis.conf
       volumes:
         - /Users/:/Users/
         #- ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
