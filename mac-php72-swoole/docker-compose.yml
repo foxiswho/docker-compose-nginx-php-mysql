@@ -99,25 +99,15 @@ services:
                     ipv4_address: 10.3.1.200
                     aliases:
                     - mysql
-  adminer:
-    image: adminer
-    container_name: adminer
-    #restart: always
-    ports:
-    - 3300:8080
-    networks:
-      swoole:
-        aliases:
-        - adminer
   redis:
       build: ./redis
       container_name: redis
-      #command: redis-server /usr/local/etc/redis/redis.conf
+      command: redis-server /usr/local/etc/redis/redis.conf
       ports:
         - "6379:6379"
       volumes:
         - /Users/:/Users/
-        #- ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+        - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
       networks:
                   swoole:
                       aliases:
