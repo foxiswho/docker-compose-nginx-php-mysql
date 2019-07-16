@@ -1,0 +1,115 @@
+version: 3.5
+
+services:
+  nginx:
+      image: nginx:1.17
+      container_name: nginx
+      ports:
+        - "80:80"
+      volumes:
+        - ./nginx/html:/usr/share/nginx/html
+        - ./nginx/conf.d:/etc/nginx/conf.d
+        - /www/:/www/
+        - /home/:/home/
+      environment:
+        - TZ=Asia/Shanghai
+#      expose:
+#        - "9000"
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
+      networks:
+        swoole:
+            aliases:
+              - nginx
+        swoole-h:
+          ipv4_address: 10.3.1.100
+          aliases:
+          - nginx
+  php:
+      build: ./php
+      container_name: php
+#      ports:
+#        - "9000:9000"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
+      volumes:
+        - /www/:/www/
+        - /home/:/home/
+      environment:
+        - TZ=Asia/Shanghai
+      networks:
+        swoole:
+            aliases:
+              - php
+        swoole-h:
+          ipv4_address: 10.3.1.110
+          aliases:
+          - php
+  phpcli:
+      build: ./php-cli
+      container_name: phpcl
+      command: php /demo/demo.php
+#      expose:
+#        - "9501"
+#      ports:
+#        - "9501:9501"
+      extra_hosts:
+      - "a.net:10.3.1.100"
+      - "b.net:10.3.1.100"
+      volumes:
+        - /www/:/www/
+        - /home/:/home/
+        - ./php-cli/demo:/demo:ro
+      environment:
+        - TZ=Asia/Shanghai
+      networks:
+              swoole:
+                  aliases:
+                    - phpcli
+              swoole-h:
+                ipv4_address: 10.3.1.120
+                aliases:
+                - phpcli
+  mysql:
+      build: ./mysql
+      container_name: mysql
+      hostname: mysqlhost
+      ports:
+        - "3306:3306"
+      environment:
+        TZ: Asia/Shanghai
+        MYSQL_ROOT_PASSWORD: root
+      networks:
+        swoole:
+            aliases:
+              - mysql
+  redis:
+      build: ./redis
+      container_name: redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - /www/:/www/
+      environment:
+        - TZ=Asia/Shanghai
+      networks:
+              swoole:
+                  aliases:
+                    - redis
+networks:
+  swoole:
+    name: swoole
+    driver: bridge
+  swoole-h:
+    name: swoole-h
+    driver: macvlan
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.3.1.0/24
