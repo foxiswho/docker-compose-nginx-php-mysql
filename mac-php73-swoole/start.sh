@@ -16,7 +16,7 @@ chmod -R 777 ${DIR}/elasticsearch/data
 chmod -R 777 ${DIR}/elasticsearch/logs
 chmod -R 777 ${DIR}/logstash/data
 chmod -R 777 ${DIR}/logstash/logs
-chmod -R 777 ${DIR}/logstash/pipeline/tmp
+chmod -R 777 ${DIR}/logstash/pipeline
 
 
 docker-compose up
