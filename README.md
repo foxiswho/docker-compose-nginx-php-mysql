@@ -1,5 +1,6 @@
 # docker-compose-nginx-php-mysql
-docker-compose+nginx+php+mysql+redis
+docker-compose+nginx+php+mysql+redis elasticsearch  logstash kibana
+
 # 版本
 php:5.6.x
 php:7.x
@@ -11,11 +12,94 @@ nginx:latest
 
 
 # 更新说明
+ * 2019-07-17
+   * 更新PHP版本 7.3.x
+   * 增加 elasticsearch  logstash kibana
  * 2018-3-11 
    * 更新 docker-compose 版本为3.5版本
    * 去除 elasticsearch 容器 (稍后放出 elk容器集群)
    * 更新 网络名称为`lnmp`,不使用默认网络，方便其他容器或容器集群加入到`lnmp`网络中
    * 更新 nginx default.conf配置文件,调用php容器默认别名
+
+# 部署
+假设 本机电脑为 `Mac` 系统,进入 `mac-php73-swoole`文件夹， 执行命令
+```bash
+chmod +x start.sh
+
+
+./start.sh
+```
+
+执行成功后，`logstash` 第一次是启动不成功的，因为有案例 程序。
+
+## 创建案例索引
+
+```bash
+chmod +x elasticsearch/index/goods_create.sh
+```
+执行
+```bash
+./elasticsearch/index/goods_create.sh
+```
+## logstash 案例配置
+
+用mysql数据库管理软件，创建数据库test，并导入`logstash/test.sql` 文件。
+再 启动
+```bash
+docker start logstash
+```
+即可看到效果
+
+
+# nginx 相关路径说明
+`nginx/conf.d`  映射本地配置文件夹，映射到容器内`/etc/nginx/conf.d`
+`nginx/html`  映射本地站点案例，映射到容器内`/usr/share/nginx/html`
+
+端口：`80`
+
+## 容器内
+`/etc/nginx`    各种配置文件
+`/etc/nginx/conf.d`    外部映射路径
+
+# php
+
+端口: `9000`
+
+# redis
+端口: `6379`
+
+# mysql
+端口: `3306`
+
+默认账号/密码:  `root`/`root`
+
+`/redis/conf/redis.conf` 映射本地配置文件，映射到容器内 `/usr/local/etc/redis/redis.conf`
+
+
+# elasticsearch
+端口: `9200`
+端口: `9300`
+
+配置文件:`elasticsearch/config/elasticsearch.yml`
+
+
+默认 已安装好 `analysis-ik`中文分词，此配置文件在 `elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml`
+
+# logstash
+配置文件:`logstash/config/logstash.yml`
+
+#  kibana
+端口: `5601`
+
+配置文件:`kibana/config/kibana.yml`
+
+============================================
+============================================
+# 以下为旧版说明
+# 以下为旧版说明
+# 以下为旧版说明
+# 以下为旧版说明
+# 以下为旧版说明
 
 # elasticsearch logtsash kibana
 如果你要使用搜索引擎

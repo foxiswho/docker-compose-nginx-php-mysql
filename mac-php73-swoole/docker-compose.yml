@@ -94,7 +94,7 @@ services:
         MYSQL_ROOT_PASSWORD: root
       volumes:
         - /tmp/:/tmp/
-        #- /my/own/datadir:/var/lib/mysql
+        - ./mysql/data:/var/lib/mysql
       networks:
                   swoole:
                       aliases:
@@ -120,6 +120,7 @@ services:
                         - redis
   elasticsearch:
     image: foxiswho/elk:elasticsearch-7.2.0
+    container_name: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -139,13 +140,14 @@ services:
           - elasticsearch
   logstash:
     image: foxiswho/elk:logstash-7.2.0
+    container_name: logstash
     volumes:
       - ./logstash/data:/usr/share/logstash/data
       - ./logstash/logs:/usr/share/logstash/logs
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
-    ports:
-      - "5000:5000"
+#    ports:
+#      - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -156,6 +158,7 @@ services:
       - elasticsearch
   kibana:
     image: foxiswho/elk:kibana-7.2.0
+    container_name: kibana
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
     ports:

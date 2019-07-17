@@ -130,8 +130,8 @@ services:
       - ./logstash/logs:/usr/share/logstash/logs
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
-    ports:
-      - "5000:5000"
+#    ports:
+#      - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
