@@ -105,6 +105,7 @@ services:
                     - redis
   elasticsearch:
     image: foxiswho/elk:elasticsearch-7.2.0
+    container_name: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -123,6 +124,7 @@ services:
           - elasticsearch
   logstash:
     image: foxiswho/elk:logstash-7.2.0
+    container_name: logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
@@ -138,6 +140,7 @@ services:
       - elasticsearch
   kibana:
     image: foxiswho/elk:kibana-7.2.0
+    container_name: kibana
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
     ports:

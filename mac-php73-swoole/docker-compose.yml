@@ -126,6 +126,7 @@ services:
       #词库 7.1.1 默认安装了
       - ./elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml:/usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
       # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
     ports:
       - "9200:9200"
@@ -139,6 +140,8 @@ services:
   logstash:
     image: foxiswho/elk:logstash-7.2.0
     volumes:
+      - ./logstash/data:/usr/share/logstash/data
+      - ./logstash/logs:/usr/share/logstash/logs
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
     ports:
