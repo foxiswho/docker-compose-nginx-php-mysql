@@ -126,6 +126,8 @@ services:
     image: foxiswho/elk:logstash-7.2.0
     container_name: logstash
     volumes:
+      - ./logstash/data:/usr/share/logstash/data
+      - ./logstash/logs:/usr/share/logstash/logs
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
     ports:
