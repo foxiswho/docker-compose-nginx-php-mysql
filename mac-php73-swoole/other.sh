@@ -2,8 +2,8 @@
 
 # 宿主机执行 当前文件
 
-mkdir -p /www/php
-mkdir -p /www/logs
+mkdir -p /Volumes/work/php
+mkdir -p /Volumes/work/logs
 mkdir -p elasticsearch/data
 
 

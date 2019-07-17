@@ -96,12 +96,59 @@ services:
         - "6379:6379"
       volumes:
         - /www/:/www/
+        - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
       environment:
         - TZ=Asia/Shanghai
       networks:
               swoole:
                   aliases:
                     - redis
+  elasticsearch:
+    image: foxiswho/elk:elasticsearch-7.2.0
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
+      #词库 7.1.1 默认安装了
+      - ./elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml:/usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    networks:
+      swoole:
+        aliases:
+          - elasticsearch
+  logstash:
+    image: foxiswho/elk:logstash-7.2.0
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      swoole:
+        aliases:
+          - logstash
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: foxiswho/elk:kibana-7.2.0
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      swoole:
+        aliases:
+          - kibana
+    depends_on:
+      - elasticsearch
+
 networks:
   swoole:
     name: swoole
