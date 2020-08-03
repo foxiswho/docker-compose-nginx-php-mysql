@@ -53,7 +53,7 @@ services:
           - php
   phpcli:
       build: ./php-cli
-      container_name: phpcl
+      container_name: php-cli
       command: php /demo/demo.php
 #      expose:
 #        - "9501"
@@ -79,12 +79,15 @@ services:
   mysql:
       build: ./mysql
       container_name: mysql
-      hostname: mysqlhost
+      hostname: mysql
       ports:
         - "3306:3306"
       environment:
         TZ: Asia/Shanghai
         MYSQL_ROOT_PASSWORD: root
+      volumes:
+        - /tmp/:/tmp/
+        - ./mysql/data:/var/lib/mysql
       networks:
         swoole:
             aliases:
@@ -92,6 +95,7 @@ services:
   redis:
       build: ./redis
       container_name: redis
+      command: redis-server /usr/local/etc/redis/redis.conf
       ports:
         - "6379:6379"
       volumes:
@@ -112,6 +116,7 @@ services:
       #词库 7.1.1 默认安装了
       - ./elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml:/usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
       # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
     ports:
       - "9200:9200"
